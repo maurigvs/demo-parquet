@@ -1,4 +1,4 @@
-package br.com.maurigvs.demoparquet;
+package br.com.maurigvs.parquet.service;
 
 import java.io.IOException;
 import java.util.List;

@@ -1,4 +1,4 @@
-package br.com.maurigvs.demoparquet.model;
+package br.com.maurigvs.parquet.model;
 
 public class User {
 

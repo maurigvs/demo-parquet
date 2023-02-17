@@ -1,12 +1,12 @@
-package br.com.maurigvs.demoparquet;
+package br.com.maurigvs.parquet;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DemoParquetApplication {
+public class ParquetApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(DemoParquetApplication.class, args);
+        SpringApplication.run(ParquetApplication.class, args);
     }
 }

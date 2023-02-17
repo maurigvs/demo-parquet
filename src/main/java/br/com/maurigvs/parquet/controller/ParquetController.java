@@ -1,4 +1,4 @@
-package br.com.maurigvs.demoparquet;
+package br.com.maurigvs.parquet.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.maurigvs.demoparquet.model.User;
+import br.com.maurigvs.parquet.model.User;
+import br.com.maurigvs.parquet.service.ParquetService;
 
 @RestController
 @RequestMapping("/parquet")

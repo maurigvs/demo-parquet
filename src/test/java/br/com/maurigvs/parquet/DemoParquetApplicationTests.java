@@ -1,4 +1,4 @@
-package br.com.maurigvs.demoparquet;
+package br.com.maurigvs.parquet;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

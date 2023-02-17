@@ -1,4 +1,4 @@
-package br.com.maurigvs.demoparquet;
+package br.com.maurigvs.parquet.service;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,7 +14,7 @@ import org.apache.parquet.schema.MessageTypeParser;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import br.com.maurigvs.demoparquet.model.User;
+import br.com.maurigvs.parquet.model.User;
 
 @Service
 public class ParquetService {

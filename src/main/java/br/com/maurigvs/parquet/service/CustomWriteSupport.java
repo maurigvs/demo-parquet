@@ -1,4 +1,4 @@
-package br.com.maurigvs.demoparquet;
+package br.com.maurigvs.parquet.service;
 
 import java.util.HashMap;
 import java.util.List;
