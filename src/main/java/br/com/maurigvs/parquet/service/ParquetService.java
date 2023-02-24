@@ -4,8 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 import org.apache.hadoop.fs.Path;
 import org.apache.parquet.hadoop.metadata.CompressionCodecName;
@@ -14,8 +14,11 @@ import org.apache.parquet.schema.MessageTypeParser;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import br.com.maurigvs.parquet.model.User;
+import br.com.maurigvs.parquet.entities.User;
+import br.com.maurigvs.parquet.utiils.UserParquetWriter;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 public class ParquetService {
 
@@ -25,51 +28,43 @@ public class ParquetService {
     @Value("${output.directoryPath}")
     private String outputDirectoryPath;
 
-    public void save(List<User> userList) throws IOException {
+    public void postUsersToFile(List<User> userList) throws Exception {
 
-        List<List<String>> columns = getDataForFile(userList);
-        MessageType schema = getSchemaForParquetFile();
-        CustomParquetWriter writer = getParquetWriter(schema);
+        userList.forEach(u -> u.setId(UUID.randomUUID()));
 
-        for (List<String> column : columns) {
-            System.out.println("Writing line: " + Arrays.toString(column.toArray()));
+        List<List<String>> userData = getUserData(userList);
+        MessageType userSchema = getUserSchema(schemaFilePath);
+        UserParquetWriter writer = getParquetWriter(userSchema);
+
+        for (List<String> column : userData)
             writer.write(column);
-        }
-
-        System.out.println("Finished writing Parquet file.");
-
         writer.close();
     }
 
-    private CustomParquetWriter getParquetWriter(MessageType schema) throws IOException {
-        String outputFilePath = outputDirectoryPath + "/" + System.currentTimeMillis() + ".parquet";
-        File outputParquetFile = new File(outputFilePath);
-        Path path = new Path(outputParquetFile.toURI().toString());
-        return new CustomParquetWriter(
-                path, schema, false, CompressionCodecName.SNAPPY
-        );
+    private UserParquetWriter getParquetWriter(MessageType schema) throws Exception {
+
+        String outputPath = outputDirectoryPath + "/users.parquet";
+        File outputFile = new File(outputPath);
+        Path path = new Path(outputFile.toURI().toString());
+        return new UserParquetWriter(path, schema, false, CompressionCodecName.SNAPPY);
     }
 
-    private MessageType getSchemaForParquetFile() throws IOException {
+    private MessageType getUserSchema(String schemaFilePath) throws IOException {
+
         File resource = new File(schemaFilePath);
         String rawSchema = new String(Files.readAllBytes(resource.toPath()));
         return MessageTypeParser.parseMessageType(rawSchema);
     }
 
-    private List<List<String>> getDataForFile(List<User> userList) {
-
-        List<List<String>> data = new ArrayList<>();
-        int counter = 0;
-
+    private List<List<String>> getUserData(List<User> userList) {
+        List<List<String>> userData = new ArrayList<>();
         for (User user : userList) {
-            counter++;
-            List<String> fileItem = new ArrayList<>();
-            fileItem.add(String.valueOf(counter));
-            fileItem.add(user.getUsername());
-            fileItem.add(String.valueOf(user.isActive()));
-            data.add(fileItem);
+            List<String> item = new ArrayList<>();
+            item.add(user.getId().toString());
+            item.add(user.getUsername());
+            item.add(String.valueOf(user.isActive()));
+            userData.add(item);
         }
-
-        return data;
+        return userData;
     }
 }

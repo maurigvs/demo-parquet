@@ -1,5 +1,5 @@
 message m {
-  required INT64 id;
+  required binary id;
   required binary username;
   required boolean active;
 }
