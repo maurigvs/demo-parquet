@@ -9,23 +9,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.maurigvs.parquet.entities.User;
-import br.com.maurigvs.parquet.service.ParquetService;
+import br.com.maurigvs.parquet.model.User;
+import br.com.maurigvs.parquet.service.UserService;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
 
     @Autowired
-    ParquetService parquetService;
+    UserService userService;
 
     @PostMapping
-    public ResponseEntity<String> postUsers(@RequestBody List<User> userList){
-        try {
-            parquetService.postUsersToFile(userList);
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError().body(e.getMessage());
-        }
+    public ResponseEntity<String> postUsers(@RequestBody List<User> userList) throws Exception {
+        userService.saveUsers(userList);
         return ResponseEntity.noContent().build();
     }
 }

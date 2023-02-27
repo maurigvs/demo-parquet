@@ -1,4 +1,4 @@
-package br.com.maurigvs.parquet.utiils.writer;
+package br.com.maurigvs.parquet.service.writer;
 
 import java.util.HashMap;
 import java.util.List;
@@ -11,13 +11,13 @@ import org.apache.parquet.io.api.Binary;
 import org.apache.parquet.io.api.RecordConsumer;
 import org.apache.parquet.schema.MessageType;
 
-public class UserWriteSupport extends WriteSupport<List<String>> {
+public class CustomWriteSupport extends WriteSupport<List<String>> {
 
     MessageType schema;
     RecordConsumer recordConsumer;
     List<ColumnDescriptor> columnDescriptors;
 
-    UserWriteSupport(MessageType schema) {
+    CustomWriteSupport(MessageType schema) {
         this.schema = schema;
         this.columnDescriptors = schema.getColumns();
     }

@@ -1,4 +1,4 @@
-package br.com.maurigvs.parquet.entities;
+package br.com.maurigvs.parquet.model;
 
 import java.util.UUID;
 
