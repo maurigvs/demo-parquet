@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import br.com.maurigvs.parquet.entities.User;
-import br.com.maurigvs.parquet.utiils.UserParquetWriter;
+import br.com.maurigvs.parquet.utiils.writer.UserParquetWriter;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

@@ -1,4 +1,4 @@
-package br.com.maurigvs.parquet.utiils;
+package br.com.maurigvs.parquet.utiils.writer;
 
 import java.util.List;
 
