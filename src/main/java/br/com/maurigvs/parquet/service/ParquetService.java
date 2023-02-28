@@ -15,9 +15,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.maurigvs.parquet.model.User;
 import br.com.maurigvs.parquet.service.writer.CustomParquetWriter;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @Service
 public class ParquetService {
 
